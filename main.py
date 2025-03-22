@@ -4,8 +4,16 @@ from stats import sort_character_dictionary
 import sys
 
 def get_book_text(filepath):
-    with open(filepath) as f:
-        return f.read()
+    try:
+        with open(filepath) as f:
+            return f.read()
+    except FileNotFoundError as e:
+        print(e)
+        sys.exit(1)
+    except IsADirectoryError as e:
+        print(e)
+        print("Please specify a book within the 'books' directory")
+        sys.exit(1)
     
 def checkSysInput(input):
     if len(input) != 2:
